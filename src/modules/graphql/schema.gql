@@ -1,0 +1,22 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type LoginObject {
+  """The token of the user"""
+  token: String!
+}
+
+type Mutation {
+  login(
+    """The username of the user"""
+    email: String!
+
+    """The password of the user"""
+    password: String!
+  ): LoginObject!
+}
+
+type Query {
+  hello: String!
+}
