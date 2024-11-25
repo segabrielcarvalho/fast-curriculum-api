@@ -1,0 +1,204 @@
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Currículo - {{header.name}}</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 850px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      }
+
+      h1,
+      h2 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      h1 {
+        font-size: 2rem;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+        border-bottom: 2px solid #2c3e50;
+        padding-bottom: 5px;
+        margin-bottom: 20px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .header p {
+        margin: 5px 0;
+        font-size: 1rem;
+        color: #555;
+      }
+
+      .section {
+        margin-bottom: 30px;
+      }
+
+      .list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .list-item {
+        margin-bottom: 15px;
+        font-size: 1rem;
+      }
+
+      .list-item strong {
+        color: #2c3e50;
+      }
+
+      .responsibilities,
+      .details {
+        margin-top: 5px;
+        margin-left: 15px;
+        font-size: 0.95rem;
+        color: #555;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        font-size: 0.9rem;
+        color: gray;
+      }
+
+      .highlight {
+        color: #e67e22;
+        font-weight: bold;
+      }
+
+      .section-title {
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 1.1rem;
+        color: #34495e;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <h1>{{header.name}}</h1>
+        <p class="highlight">{{header.contact}}</p>
+      </div>
+
+      <!-- Education Section -->
+      {{#if education}}
+      <div class="section">
+        <h2>Educação</h2>
+        <ul class="list">
+          {{#each education}}
+          <li class="list-item">
+            <strong>{{institution}}</strong> - {{location}}<br />
+            <span class="highlight">{{degree}}</span>, {{graduationDate}}<br />
+            {{#each details}}
+            <small class="details">{{this}}</small><br />
+            {{/each}}
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+
+      <!-- Technical Skills Section -->
+      {{#if technicalSkills}}
+      <div class="section">
+        <h2>Habilidades Técnicas</h2>
+        <ul class="list">
+          {{#each technicalSkills}}
+          <li class="list-item">
+            <span class="highlight">{{category}}:</span> {{skills}}<br />
+            {{#each details}}
+            <small class="details">{{this}}</small><br />
+            {{/each}}
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+
+      <!-- Relevant Coursework Section -->
+      {{#if relevantCoursework}}
+      <div class="section">
+        <h2>Cursos Relevantes</h2>
+        <ul class="list">
+          {{#each relevantCoursework}}
+          <li class="list-item">{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+
+      <!-- Experience Section -->
+      {{#if experience}}
+      <div class="section">
+        <h2>Experiência Profissional</h2>
+        <ul class="list">
+          {{#each experience}}
+          <li class="list-item">
+            <strong>{{organization}}</strong> - {{location}}<br />
+            <span class="highlight">{{position}}</span>, {{date}}<br />
+            {{#each responsibilities}}
+            <small class="responsibilities">- {{this}}</small><br />
+            {{/each}}
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+
+      <!-- Activities Section -->
+      {{#if activities}}
+      <div class="section">
+        <h2>Atividades</h2>
+        <ul class="list">
+          {{#each activities}}
+          <li class="list-item">
+            <strong>{{name}}</strong> - {{role}}<br />
+            {{date}}
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+
+      <!-- Interests Section -->
+      {{#if interests}}
+      <div class="section">
+        <h2>Interesses</h2>
+        <ul class="list">
+          {{#each interests}}
+          <li class="list-item">{{this}}</li>
+          {{/each}}
+        </ul>
+      </div>
+      {{/if}}
+    </div>
+  </body>
+</html>

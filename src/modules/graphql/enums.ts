@@ -1,5 +1,5 @@
 import { registerEnumType } from '@nestjs/graphql';
-import { RoleEnum } from '@prisma/client';
+import { CompanyExperienceTypeEnum, RoleEnum } from '@prisma/client';
 
 export enum SortOrder {
    asc = 'asc',
@@ -15,3 +15,6 @@ export enum ActionGetServiceEnum {
 registerEnumType(SortOrder, { name: 'SortOrder' });
 registerEnumType(ActionGetServiceEnum, { name: 'ActionGetServiceEnum' });
 registerEnumType(RoleEnum, { name: 'RoleEnum' });
+registerEnumType(CompanyExperienceTypeEnum, {
+   name: 'CompanyExperienceTypeEnum',
+});

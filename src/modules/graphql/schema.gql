@@ -2,12 +2,209 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AvatarObject {
+  User: UserObject!
+  createdAt: DateTime!
+  id: ID!
+  mimetype: String!
+  path: String!
+  updatedAt: DateTime!
+  userId: String!
+}
+
+input BoolFilter {
+  equals: Boolean
+  not: NestedBoolFilter
+}
+
+type CompanyExperienceObject {
+  ProfessionalInfo: ProfessionalInfoObject!
+  createdAt: DateTime!
+  description: String
+  endAt: DateTime
+  id: ID!
+  isActive: Boolean!
+  name: String!
+  professionalInfoId: String!
+  role: String!
+  startAt: DateTime!
+  type: CompanyExperienceTypeEnum!
+  updatedAt: DateTime!
+}
+
+enum CompanyExperienceTypeEnum {
+  CONTRACTOR
+  FREELANCER
+  FULL_TIME
+  INTERNSHIP
+  OUTSOURCED
+  PART_TIME
+  TEMPORARY
+  TRAINEE
+  VOLUNTEER
+}
+
+type ContactInfoObject {
+  ProfessionalInfo: ProfessionalInfoObject!
+  address: String
+  city: String
+  country: String
+  createdAt: DateTime!
+  github: String
+  id: ID!
+  isActive: Boolean!
+  linkedin: String
+  phone: String
+  professionalInfoId: String!
+  state: String
+  updatedAt: DateTime!
+  website: String
+  zipCode: String
+}
+
+input CreateCompanyExperienceInput {
+  ProfessionalInfo: GenericConnectIdInput!
+  description: String
+  endAt: DateTime
+  name: String!
+  role: String!
+  startAt: DateTime!
+  type: CompanyExperienceTypeEnum!
+}
+
+input CreateCurriculumInput {
+  isPublic: Boolean! = true
+  jobDescription: String
+  title: String!
+}
+
+input CreateEducationInput {
+  ProfessionalInfo: GenericConnectIdInput!
+  degree: String!
+  endAt: DateTime
+  institution: String!
+  startAt: DateTime!
+  studyArea: String!
+}
+
+input CreateSkillInput {
+  ProfessionalInfo: GenericConnectIdInput!
+  description: String
+  name: String!
+}
+
+input CreateUserInput {
+  avatarInBase64: String
+  email: String!
+  name: String
+  password: String!
+  role: RoleEnum!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: NestedDateTimeFilter
+  notIn: [DateTime!]
+}
+
+input DefaultWhereInput {
+  id: ID!
+}
+
+type EducationObject {
+  ProfessionalInfo: ProfessionalInfoObject!
+  createdAt: DateTime!
+  degree: String!
+  endAt: DateTime
+  id: ID!
+  institution: String!
+  isActive: Boolean!
+  professionalInfoId: String!
+  startAt: DateTime!
+  studyArea: String!
+  updatedAt: DateTime!
+}
+
+input GenericConnectIdInput {
+  connect: UniqueFieldIDInput!
+}
+
+input ListCompaniesExperienceInput {
+  AND: [ListCompaniesExperienceInput!]
+  NOT: [ListCompaniesExperienceInput!]
+  OR: [ListCompaniesExperienceInput!]
+  ProfessionalInfo: ListCompaniesExperienceRelationFilter
+  createdAt: DateTimeFilter
+  id: StringFilter
+  isActive: BoolFilter
+  name: StringFilter
+  professionalInfoId: StringFilter
+  role: StringFilter
+  startAt: DateTimeFilter
+  updatedAt: DateTimeFilter
+}
+
+input ListCompaniesExperienceRelationFilter {
+  is: ListProfessionalInfoInput
+  isNot: ListProfessionalInfoInput
+}
+
+input ListEducationsInput {
+  AND: [ListEducationsInput!]
+  NOT: [ListEducationsInput!]
+  OR: [ListEducationsInput!]
+  ProfessionalInfo: ListEducationsRelationFilter
+  createdAt: DateTimeFilter
+  degree: StringFilter
+  id: String
+  institution: StringFilter
+  isActive: BoolFilter
+  professionalInfoId: StringFilter
+  startAt: DateTimeFilter
+  studyArea: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input ListEducationsRelationFilter {
+  is: ListProfessionalInfoInput
+  isNot: ListProfessionalInfoInput
+}
+
+input ListProfessionalInfoInput {
+  AND: [ListProfessionalInfoInput!]
+  NOT: [ListProfessionalInfoInput!]
+  OR: [ListProfessionalInfoInput!]
+  createdAt: DateTimeFilter
+  id: StringFilter
+  isActive: BoolFilter
+  updatedAt: DateTimeFilter
+  userId: StringFilter
+}
+
 type LoginObject {
   """The token of the user"""
   token: String!
 }
 
 type Mutation {
+  createCompanyExperience(data: CreateCompanyExperienceInput!): CompanyExperienceObject!
+  createCurriculum(data: CreateCurriculumInput!): String!
+  createEducation(data: CreateEducationInput!): EducationObject!
+  createSkill(data: CreateSkillInput!): SkillObject!
+  createUser(data: CreateUserInput!): UserObject!
+  deleteCompanyExperience(id: String!): CompanyExperienceObject!
+  deleteEducation(id: String!): EducationObject!
+  deleteSkill(id: String!): SkillObject!
   login(
     """The username of the user"""
     email: String!
@@ -15,8 +212,121 @@ type Mutation {
     """The password of the user"""
     password: String!
   ): LoginObject!
+  updateContactInfo(data: UpdateContactInfoInput!, where: DefaultWhereInput!): ContactInfoObject!
+}
+
+input NestedBoolFilter {
+  equals: Boolean!
+}
+
+input NestedDateTimeFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  notIn: [DateTime!]
+}
+
+input NestedStringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+type ProfessionalInfoObject {
+  Companies: [CompanyExperienceObject!]
+  ContactInfo: ContactInfoObject
+  Educations: [EducationObject!]
+  Skills: [SkillObject!]
+  User: UserObject!
+  createdAt: DateTime!
+  id: ID!
+  isActive: Boolean!
+  updatedAt: DateTime!
+  userId: String!
 }
 
 type Query {
+  getContactInfoByUserId(userId: String!): ContactInfoObject!
+  getProfessionalInfo(id: String!): ProfessionalInfoObject!
+  getProfessionalInfoByUserId(userId: String!): ProfessionalInfoObject!
   hello: String!
+  listCompanyExperience(where: ListCompaniesExperienceInput): [CompanyExperienceObject!]!
+  listEducations(where: ListEducationsInput): [EducationObject!]!
+  me: UserObject!
+}
+
+enum QueryMode {
+  default
+  insensitive
+}
+
+enum RoleEnum {
+  ADMIN
+  USER
+}
+
+type SkillObject {
+  ProfessionalInfo: ProfessionalInfoObject!
+  createdAt: DateTime!
+  description: String
+  id: ID!
+  isActive: Boolean!
+  name: String!
+  professionalInfoId: String!
+  updatedAt: DateTime!
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: NestedStringFilter
+  notIn: [String!]
+  startsWith: String
+}
+
+input UniqueFieldIDInput {
+  id: ID!
+}
+
+input UpdateContactInfoInput {
+  address: String
+  city: String
+  country: String
+  github: String
+  linkedin: String
+  phone: String
+  state: String
+  website: String
+  zipCode: String
+}
+
+type UserObject {
+  Avatar: AvatarObject
+  ProfessionalInfo: ProfessionalInfoObject
+  createdAt: DateTime!
+  email: String!
+  id: ID!
+  isActive: Boolean!
+  lastLogin: DateTime
+  name: String
+  role: RoleEnum!
+  updatedAt: DateTime!
 }

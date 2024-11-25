@@ -1,6 +1,7 @@
 import getApp from './app';
 import { ConfigService } from '@nestjs/config';
 import { MyLogger } from './modules/logger/my-logger.service';
+import 'src/modules/graphql/enums';
 
 async function bootstrap() {
    const app = await getApp();

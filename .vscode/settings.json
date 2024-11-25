@@ -26,7 +26,7 @@
    "[ignore]": {
       "editor.defaultFormatter": "foxundermoon.shell-format"
    },
-   "cSpell.words": ["logsene", "nestjs"],
+   "cSpell.words": ["logsene", "nestjs", "openai"],
    "[prisma]": {
       "editor.defaultFormatter": "Prisma.prisma"
    }

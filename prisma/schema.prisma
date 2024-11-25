@@ -13,6 +13,11 @@ datasource db {
    url      = env("DATABASE_URL")
 }
 
+generator nestgraphql {
+   provider = "node node_modules/prisma-nestjs-graphql"
+   output   = "../@generated"
+}
+
 enum RoleEnum {
    ADMIN
    USER
@@ -42,10 +47,25 @@ model User {
    role      RoleEnum  @default(USER)
    lastLogin DateTime?
 
+   Avatar           Avatar?
    ProfessionalInfo ProfessionalInfo?
    CVs              Curriculum[]
 
    @@index([email])
+}
+
+model Avatar {
+   id        String   @id @default(uuid())
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
+
+   mimetype String
+   path     String
+
+   userId String @unique
+   User   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+   @@index([userId])
 }
 
 model Curriculum {
@@ -73,9 +93,32 @@ model ProfessionalInfo {
    Educations     Education[]         @relation("ProfessionalEducations")
    Skills         Skill[]             @relation("ProfessionalSkills")
    Certifications Certification[]     @relation("ProfessionalCertifications")
+   ContactInfo    ContactInfo?
 
    User   User   @relation(fields: [userId], references: [id])
    userId String @unique
+
+   @@index([userId])
+}
+
+model ContactInfo {
+   id        String   @id @default(uuid())
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
+   isActive  Boolean  @default(true)
+
+   phone    String?
+   address  String?
+   city     String?
+   state    String?
+   country  String?
+   zipCode  String?
+   website  String?
+   linkedin String?
+   github   String?
+
+   ProfessionalInfo   ProfessionalInfo @relation(fields: [professionalInfoId], references: [id])
+   professionalInfoId String           @unique
 }
 
 model CompanyExperience {
@@ -84,11 +127,12 @@ model CompanyExperience {
    updatedAt DateTime @updatedAt
    isActive  Boolean  @default(true)
 
-   name    String
-   role    String
-   type    CompanyExperienceTypeEnum
-   startAt DateTime
-   endAt   DateTime?
+   name        String
+   role        String
+   type        CompanyExperienceTypeEnum
+   startAt     DateTime
+   endAt       DateTime?
+   description String?
 
    ProfessionalInfo   ProfessionalInfo @relation("ProfessionalCompanies", fields: [professionalInfoId], references: [id])
    professionalInfoId String

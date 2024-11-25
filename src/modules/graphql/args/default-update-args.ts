@@ -1,12 +1,12 @@
 import { ArgsType, Field } from '@nestjs/graphql';
 import { Type } from 'class-transformer';
 import { ValidateNested } from 'class-validator';
-import { DefaultUpdateInput } from '../inputs/default-update-input';
+import { DefaultWhereInput } from '../inputs/default-update-input';
 
 @ArgsType()
-export class DefaultUpdateArgs {
+export class DefaultWhereArgs {
    @ValidateNested()
-   @Type(() => DefaultUpdateInput)
-   @Field(() => DefaultUpdateInput, { nullable: false })
-   where!: DefaultUpdateInput;
+   @Type(() => DefaultWhereInput)
+   @Field(() => DefaultWhereInput, { nullable: false })
+   where!: DefaultWhereInput;
 }

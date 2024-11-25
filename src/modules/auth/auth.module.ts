@@ -8,7 +8,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import authConfig, { validateAuthEnv } from './auth.config';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LoggerModule } from '../logger/logger.module';
-import { MeService } from './services/me/me-service/me-service.service';
 import { AuthResolver } from './resolvers/auth.resolver';
 import { JwtStrategyWs } from './strategies/jwt-graphql-ws.strategy';
 
@@ -35,9 +34,8 @@ import { JwtStrategyWs } from './strategies/jwt-graphql-ws.strategy';
       LoginService,
       JwtStrategy,
       JwtStrategyWs,
-      MeService,
       AuthResolver,
    ],
-   exports: [LoginService, MeService],
+   exports: [LoginService],
 })
 export class AuthModule {}
